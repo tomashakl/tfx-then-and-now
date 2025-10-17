@@ -1,0 +1,123 @@
+
+/* TFX Then & Now — drop‑in fixes (v1.0)
+   Keep styles minimal; layer on top of existing CSS.
+*/
+
+:root{
+  --tfx-bg: radial-gradient(1200px 600px at 50% -10%, rgba(255,255,255,.06), transparent 65%),
+            linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%);
+  --tfx-font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", "DejaVu Sans", sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: #0b0f14, var(--tfx-bg);
+  color: #e5e7eb;
+  font-family: var(--tfx-font);
+  line-height: 1.55;
+}
+
+/* 1) Compare slider */
+.compare, .compare-slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.compare img, .compare-slider img { display: block; width: 100%; height: auto; }
+.compare .after, .compare .compare__after,
+.compare-slider .after, .compare-slider .compare__after,
+[data-compare="after"] {
+  position: absolute; inset: 0;
+  clip-path: inset(0 0 0 50%);
+  transition: clip-path .08s linear;
+}
+.compare .handle, .compare .compare__handle,
+.compare-slider .handle, .compare-slider .compare__handle,
+[data-compare="handle"] {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 4px; height: 100%;
+  background: rgba(255,255,255,.8);
+  box-shadow: 0 0 0 2px rgba(0,0,0,.35);
+  cursor: ew-resize;
+}
+.compare .handle::before,
+.compare .handle::after,
+.compare-slider .handle::before,
+.compare-slider .handle::after,
+[data-compare="handle"]::before,
+[data-compare="handle"]::after {
+  content: ''; position: absolute; top: 50%; width: 18px; height: 18px;
+  border-radius: 50%; background: #fff; transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+}
+.compare .handle::before,
+.compare-slider .handle::before,
+[data-compare="handle"]::before { left: 0; }
+.compare .handle::after,
+.compare-slider .handle::after,
+[data-compare="handle"]::after { left: 100%; }
+
+/* 2) Hero arrows */
+.hero__prev, .hero__next,
+[data-hero-prev], [data-hero-next] {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 42px; height: 42px; border-radius: 999px; border: 0;
+  background: rgba(0,0,0,.45); color: #fff; font-size: 24px;
+  display: grid; place-items: center; cursor: pointer; z-index: 5;
+  user-select: none;
+}
+.hero__prev:hover, .hero__next:hover,
+[data-hero-prev]:hover, [data-hero-next]:hover { background: rgba(0,0,0,.65); }
+.hero__prev, [data-hero-prev] { left: 8px; }
+.hero__next, [data-hero-next] { right: 8px; }
+.hero__slide, [data-hero-slide] { display: none; }
+.hero__slide.is-active, [data-hero-slide].is-active { display: block; }
+
+/* 3) Back to top */
+#backToTop, [data-backtotop] {
+  position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+  width: 42px; height: 42px; border-radius: 999px; border: 0;
+  background: rgba(17,24,39,.9); color: #fff; font-size: 18px;
+  display: grid; place-items: center; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+  opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease;
+}
+#backToTop.is-visible, [data-backtotop].is-visible {
+  opacity: 1; pointer-events: auto; transform: translateY(0);
+}
+
+/* 4) Lightbox */
+#lightbox {
+  position: fixed; inset: 0; z-index: 9998; display: none;
+}
+#lightbox.is-open { display: block; }
+#lightbox .lb__backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.8); }
+#lightbox .lb__figure {
+  position: absolute; inset: 4% 4% auto 4%;
+  display: grid; grid-template-areas: "img" "cap";
+  justify-items: center; gap: 12px;
+}
+#lightbox .lb__img { max-width: 100%; max-height: 78vh; border-radius: 8px; }
+#lightbox .lb__cap { font-size: .95rem; color: #e5e7eb; opacity: .85; }
+#lightbox .lb__close {
+  position: absolute; right: 8px; top: 8px; width: 44px; height: 44px;
+  background: rgba(0,0,0,.7); color: #fff; border: 0; border-radius: 8px;
+  cursor: pointer; font-size: 24px;
+}
+#lightbox .lb__nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 48px; height: 64px; background: rgba(0,0,0,.5);
+  color: #fff; border: 0; border-radius: 10px; cursor: pointer; font-size: 28px;
+}
+#lightbox .lb__prev { left: 12px; }
+#lightbox .lb__next { right: 12px; }
+
+/* Small responsive polish */
+img { height: auto; max-width: 100%; }
+.container, .wrap, main { max-width: 1100px; margin-inline: auto; padding-inline: 1rem; }
+h1, h2, h3 { line-height: 1.2; }
+@media (max-width: 640px){
+  .compare .handle, .compare-slider .handle, [data-compare="handle"] { width: 3px; }
+}
+/* Prevent text selection while dragging */
+.is-dragging, .is-dragging * { user-select: none !important; }

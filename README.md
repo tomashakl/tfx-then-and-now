@@ -18,7 +18,7 @@ This is not an official remake or game modification — just a respectful tribut
 ## 🧩 Credits
 - Original Screenshots: © 1993 Digital Image Design / Ocean Software Ltd  
 - Modern Artwork: AI-assisted reimaginings curated by the project author  
-- Web concept & integration: tomasakl & ChatGPT, 2025
+- Web concept & integration: tomashakl & ChatGPT, 2025
 
 ## 📜 License
 Creative Commons **BY-NC 4.0 (Attribution–NonCommercial)** — fan-made, non‑commercial project.

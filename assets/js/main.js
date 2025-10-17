@@ -14,3 +14,23 @@ document.addEventListener('DOMContentLoaded',()=>{
   lb?.addEventListener('click',e=>{if(e.target===lb) lb.classList.remove('open')});
   window.addEventListener('keydown',e=>{if(e.key==='Escape') lb.classList.remove('open')});
 });
+// Enable dragging using the visible handle
+document.querySelectorAll('[data-compare]').forEach(wrapper=>{
+  const resize = wrapper.querySelector('.compare-resize');
+  const handle = wrapper.querySelector('.compare-handle');
+  const range  = wrapper.querySelector('.compare-range');
+  let draggingHandle = false;
+
+  const setPos = (clientX) => {
+    const rect = wrapper.getBoundingClientRect();
+    let pct = ((clientX - rect.left) / rect.width) * 100;
+    pct = Math.max(0, Math.min(100, pct));
+    resize.style.width = pct + '%';
+    handle.style.left = pct + '%';
+    range.value = pct;
+  };
+
+  handle.addEventListener('pointerdown', (e)=>{ draggingHandle = true; handle.setPointerCapture(e.pointerId); });
+  handle.addEventListener('pointermove', (e)=>{ if(draggingHandle) setPos(e.clientX); });
+  handle.addEventListener('pointerup',   (e)=>{ draggingHandle = false; handle.releasePointerCapture(e.pointerId); });
+});

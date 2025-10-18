@@ -85,7 +85,7 @@ img{max-width:100%;display:block}
 .lightbox .nav.next{right:22px}
 
 /* About */
-.about .links{display:none}
+.about .links{display:flex;gap:1.25rem;margin-top:0.75rem;align-items:center;flex-wrap:wrap}
 
 /* Footer */
 .site-footer{padding:2rem 0;background:#090e14;border-top:1px solid var(--line)}
@@ -184,3 +184,6 @@ img{max-width:100%;display:block}
 /* 2025-10-18: Compare handle micro‑alignment */
 .compare-handle{border-left:2px solid #11e1f3}
 .compare-handle::after{left:0;transform:translate(calc(-50% + 1px), -50%);} /* +1px compensates divider thickness */
+
+.links a{color:#11e1f3;text-decoration:none;border-bottom:1px dotted rgba(17,225,243,.35);padding-bottom:2px}
+.links a:hover{border-bottom-color:rgba(17,225,243,.7)}

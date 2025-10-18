@@ -176,3 +176,11 @@ img{max-width:100%;display:block}
 .section.gallery .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
 .section.gallery .grid .card{position:relative;overflow:hidden;border-radius:14px;aspect-ratio:16/9;background:linear-gradient(#0e141c,#0e141c)}
 .section.gallery .grid .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* 2025-10-18: Themed Back-to-Top button */
+#backToTop{background:#0f1824;color:#11e1f3;border:1px solid rgba(17,225,243,.35);box-shadow:0 4px 18px rgba(17,225,243,.15)}
+#backToTop:hover{background:#111a24;color:#a9f6ff;border-color:rgba(17,225,243,.6);box-shadow:0 6px 22px rgba(17,225,243,.25)}
+
+/* 2025-10-18: Compare handle micro‑alignment */
+.compare-handle{border-left:2px solid #11e1f3}
+.compare-handle::after{left:0;transform:translate(calc(-50% + 1px), -50%);} /* +1px compensates divider thickness */

@@ -1,0 +1,69 @@
+TFX — Then & Now (2025)
+Internal Development Notes
+===========================================
+
+1. Project Goal
+-------------------------------------------
+Create a functional and visually modern template for a "Then & Now / Reimagined" website concept, focused on classic PC games from the DOS and early Windows era (up to ~2000).
+
+The first completed example: **TFX — Then & Now (2025)**
+
+Objective: achieve a complete, modular, and easily duplicable version that can be used for future titles within the same design system.
+
+
+2. Development Summary
+-------------------------------------------
+1. Base Layout & Structure
+   - Files: `index.html`, `styles.css`, `main.js`
+   - Unified folder `/assets/` (no `/img/` subfolder)
+   - All paths relative for portability (works on subdirectories or GitHub Pages)
+   - Responsive layout with dark theme and neon-accent color (#11E1F3)
+
+2. Main Page Elements
+   - Hero header with logo and title “TFX — Reimagined 2025”
+   - Interactive before/after compare slider
+   - Then & Now gallery (hover/tap image flip between 1993/2025)
+   - “Why TFX Was Ahead of Its Time” section with detailed bullet points
+   - “About this Fan Project” footer section with visible links:
+       • Age of Pixels — Project
+       • Contact (mailto link)
+   - Back-to-top button styled to match the website theme
+
+3. Functional JavaScript Features
+   - Compare slider (mouse, touch, click support)
+   - Lightbox viewer with navigation and ESC close
+   - Flipcard hover effect for desktop / tap for mobile
+   - Clean vanilla JS, no third-party libraries
+
+4. CSS Highlights
+   - Consistent accent color #11E1F3
+   - Modern fluid layout (grid, flex)
+   - `.links` section visible and styled
+   - Fixed gallery aspect ratio 16:9
+   - Subtle transitions and consistent typography
+
+5. SEO and Technical Enhancements
+   - Added `<meta description>`, `robots`, `theme-color`, `og:*`, and `apple-touch-icon`
+   - `decoding="async"` + `fetchpriority="high"` for hero image
+   - Structured data (JSON-LD, CreativeWork)
+   - Lazy loading for all gallery images
+   - Canonical and OG URLs point to GitHub Pages (to be changed later to Age of Pixels subpath)
+
+6. Integration Plan (Future)
+   - Final structure under: `/fan-projects/tfx/`
+   - More projects to follow (EF2000, Jane’s ATF, etc.)
+   - Each project will reuse the same HTML/CSS/JS skeleton and layout conventions
+
+7. GitHub Repository Notes
+   - This file (`TFX_DEV_NOTES.txt`) is for internal reference
+   - It is safe to include in the repository but not linked from any visible page
+   - Optionally exclude from indexing via `.gitignore` if needed
+
+8. Current Status (October 2025)
+   - Functional version completed
+   - All major interactive components working correctly
+   - Visual and layout consistency verified
+   - Remaining work: minor cosmetic adjustments and polish (spacing, shadows, subtle effects)
+
+-------------------------------------------
+End of document.

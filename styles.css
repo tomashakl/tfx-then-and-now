@@ -134,3 +134,17 @@ img{max-width:100%;display:block}
 
 /* Hero single image */
 .hero .bg-single{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95}
+
+/* === 2025-10-18 hotfix === */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.85);z-index:9999}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:90vh}
+.lightbox .nav{font-size:2rem;line-height:1;border:0;background:#111a;color:#fff;border-radius:999px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.lightbox .nav.prev{position:absolute;left:1rem;top:50%;transform:translateY(-50%)}
+.lightbox .nav.next{position:absolute;right:1rem;top:50%;transform:translateY(-50%)}
+.lightbox .close{position:absolute;top:1rem;right:1rem;background:#111a;color:#fff;border:0;width:44px;height:44px;border-radius:999px;cursor:pointer}
+.compare-wrapper{position:relative;overflow:hidden;cursor:ew-resize}
+.compare-wrapper img{display:block;width:100%;height:auto;user-select:none;pointer-events:none}
+.compare-resize{position:absolute;inset:0;overflow:hidden;border-right:2px solid #11e1f3}
+.compare-handle{position:absolute;top:0;bottom:0;width:0;border-left:2px solid #11e1f3;z-index:2;pointer-events:none}
+.compare-handle::after{content:'';position:absolute;left:-10px;top:50%;width:20px;height:20px;border:2px solid #11e1f3;border-radius:50%;background:#000;transform:translate(-50%,-50%)}

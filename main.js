@@ -1,81 +1,108 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // Compare sliders (click or drag handle)
-  document.querySelectorAll('[data-compare]').forEach(wrapper => {
+
+// ===== TFX: Then & Now — core interactions (robust) =====
+(function(){
+  // ---- Compare (Before/After) ----
+  function initCompare(wrapper){
     const resize = wrapper.querySelector('.compare-resize');
     const handle = wrapper.querySelector('.compare-handle');
     const range  = wrapper.querySelector('.compare-range');
+    if(!resize || !handle){ return; }
 
-    const setPos = (val) => {
-      const pct = Math.min(100, Math.max(0, val));
+    function setPct(pct){
+      if(isNaN(pct)) pct = 50;
+      pct = Math.max(0, Math.min(100, pct));
       resize.style.width = pct + '%';
-      handle.style.left = pct + '%';
-      range.value = pct;
-    };
-    setPos(range.value || 50);
+      handle.style.left  = pct + '%';
+      if(range) range.value = pct;
+    }
 
-    // Drag anywhere on wrapper
-    wrapper.addEventListener('pointerdown', e => {
+    function pointToPct(e){
       const rect = wrapper.getBoundingClientRect();
-      const pct = ((e.clientX - rect.left) / rect.width) * 100;
-      setPos(pct);
-    });
+      const clientX = (e.touches && e.touches[0] ? e.touches[0].clientX : e.clientX);
+      const x = clientX - rect.left;
+      return (x / rect.width) * 100;
+    }
 
-    // Drag by handle
     let dragging = false;
-    handle.addEventListener('pointerdown', (e) => { dragging = true; handle.setPointerCapture(e.pointerId); });
-    handle.addEventListener('pointermove', (e) => {
-      if (!dragging) return;
-      const rect = wrapper.getBoundingClientRect();
-      setPos(((e.clientX - rect.left) / rect.width) * 100);
-    });
-    handle.addEventListener('pointerup', (e) => { dragging = false; handle.releasePointerCapture(e.pointerId); });
+    function start(e){ dragging = true; setPct(pointToPct(e)); e.preventDefault(); }
+    function move(e){ if(!dragging) return; setPct(pointToPct(e)); }
+    function end(){ dragging = false; }
 
-    range.addEventListener('input', e => setPos(e.target.value));
-  });
+    // Pointer / mouse
+    wrapper.addEventListener('mousedown', start);
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', end);
 
- // Static gallery → lightbox with prev/next
-(function(){
-  const cards = Array.from(document.querySelectorAll('.gallery .card'));
+    // Touch
+    wrapper.addEventListener('touchstart', start, {passive:false});
+    window.addEventListener('touchmove', move, {passive:false});
+    window.addEventListener('touchend', end);
+
+    // Click anywhere to jump
+    wrapper.addEventListener('click', (e)=> setPct(pointToPct(e)));
+
+    // Init
+    setPct(range && range.value ? parseFloat(range.value) : 50);
+    window.addEventListener('resize', ()=> setPct(range && range.value ? parseFloat(range.value) : 50));
+  }
+
+  document.querySelectorAll('[data-compare]').forEach(initCompare);
+
+  // ---- Lightbox for gallery ----
   const lb = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
   const lbCap = document.getElementById('lightbox-cap');
-  const closeBtn = lb.querySelector('[data-close]') || lb.querySelector('.close');
-  const prevBtn = lb.querySelector('.nav.prev');
-  const nextBtn = lb.querySelector('.nav.next');
+  const btnPrev = lb ? lb.querySelector('.nav.prev') : null;
+  const btnNext = lb ? lb.querySelector('.nav.next') : null;
+  const btnClose = lb ? (lb.querySelector('[data-close]') || lb.querySelector('.close')) : null;
 
+  const cards = Array.from(document.querySelectorAll('.gallery .card img'));
   let idx = -1;
-  const getSrc = i => cards[i].querySelector('img').getAttribute('src');
+
+  function setCaptionFromSrc(src){
+    if(!lbCap) return;
+    lbCap.textContent = (src || '').toLowerCase().includes('_now') ? '2025 version' : '1993 version';
+  }
 
   function openAt(i){
+    if(!lb || !lbImg || cards.length === 0) return;
     idx = (i + cards.length) % cards.length;
-    const src = getSrc(idx);
-    lbImg.src = src;
-    lbCap.textContent = src.toLowerCase().includes('_now') ? '2025 version' : '1993 version';
+    const src = cards[idx].getAttribute('src');
+    lbImg.setAttribute('src', src);
+    setCaptionFromSrc(src);
     lb.classList.add('open');
     lb.setAttribute('aria-hidden','false');
   }
   function closeLB(){
+    if(!lb) return;
     lb.classList.remove('open');
     lb.setAttribute('aria-hidden','true');
-    lbImg.removeAttribute('src');
+    if(lbImg) lbImg.removeAttribute('src');
   }
   function next(){ openAt(idx+1); }
   function prev(){ openAt(idx-1); }
 
-  cards.forEach((c,i)=> c.addEventListener('click', ()=> openAt(i)));
-  closeBtn && closeBtn.addEventListener('click', closeLB);
-  lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLB(); });
-  nextBtn && nextBtn.addEventListener('click', next);
-  prevBtn && prevBtn.addEventListener('click', prev);
-  window.addEventListener('keydown', (e)=>{
-    if(!lb.classList.contains('open')) return;
-    if(e.key==='Escape') closeLB();
-    if(e.key==='ArrowRight') next();
-    if(e.key==='ArrowLeft') prev();
+  // Click bindings
+  cards.forEach((img, i)=>{
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', ()=> openAt(i));
   });
+  if(btnClose) btnClose.addEventListener('click', closeLB);
+  if(lb) lb.addEventListener('click', (e)=>{ if(e.target === lb) closeLB(); });
+  if(btnNext) btnNext.addEventListener('click', next);
+  if(btnPrev) btnPrev.addEventListener('click', prev);
+
+  // Keys
+  window.addEventListener('keydown', (e)=>{
+    if(!lb || !lb.classList.contains('open')) return;
+    if(e.key === 'Escape') closeLB();
+    if(e.key === 'ArrowRight') next();
+    if(e.key === 'ArrowLeft') prev();
+  });
+
 })();
 
-// Back-to-top button
+// Back-to-top button (unchanged)
 (function(){
   const btn = document.getElementById('backToTop');
   if(!btn) return;
@@ -86,24 +113,3 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
   btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 })();
-
-
-// Touch support for compare sliders
-document.querySelectorAll('[data-compare]').forEach(wrapper => {
-  const resize = wrapper.querySelector('.compare-resize');
-  const handle = wrapper.querySelector('.compare-handle');
-  const range  = wrapper.querySelector('.compare-range');
-  const setPos = (val) => {
-    const pct = Math.min(100, Math.max(0, val));
-    resize.style.width = pct + '%';
-    handle.style.left = pct + '%';
-    range.value = pct;
-  };
-  function pointer(e){
-    const rect = wrapper.getBoundingClientRect();
-    const x = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
-    setPos((x/rect.width)*100);
-  }
-  wrapper.addEventListener('touchstart', (e)=>{ e.preventDefault(); pointer(e); }, {passive:false});
-  wrapper.addEventListener('touchmove', (e)=>{ e.preventDefault(); pointer(e); }, {passive:false});
-});

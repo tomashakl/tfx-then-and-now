@@ -130,7 +130,7 @@ img{max-width:100%;display:block}
 .compare-resize{position:absolute;inset:0;overflow:hidden;border-right:2px solid #11e1f3}
 .compare-range{position:absolute;left:0;right:0;bottom:-2rem;opacity:0;pointer-events:none}
 .compare-handle{position:absolute;top:0;bottom:0;width:0;border-left:2px solid #11e1f3;pointer-events:none}
-.compare-handle::after{content:'';position:absolute;left:-10px;top:50%;width:20px;height:20px;border:2px solid #11e1f3;border-radius:50%;background:#000;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(0,0,0,.2);}
+.compare-handle::after{content:'';position:absolute;left:0;top:50%;width:20px;height:20px;border:2px solid #11e1f3;border-radius:50%;background:#000;transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(0,0,0,.2);}
 
 /* Hero single image */
 .hero .bg-single{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.95}
@@ -166,3 +166,13 @@ img{max-width:100%;display:block}
 /* Touch: allow tap to flip by toggling .flip class */
 .grid .card.flip .img-old{opacity:0}
 .grid .card.flip .img-new{opacity:1}
+
+/* compare sizing fix */
+.compare figure,.compare,.compare-wrapper{width:100%}
+.compare-wrapper{isolation:isolate}
+.compare-wrapper img{width:100%;height:auto;display:block;object-fit:cover}
+
+/* gallery sizing fix */
+.section.gallery .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+.section.gallery .grid .card{position:relative;overflow:hidden;border-radius:14px;aspect-ratio:16/9;background:linear-gradient(#0e141c,#0e141c)}
+.section.gallery .grid .card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}

@@ -148,3 +148,21 @@ img{max-width:100%;display:block}
 .compare-resize{position:absolute;inset:0;overflow:hidden;border-right:2px solid #11e1f3}
 .compare-handle{position:absolute;top:0;bottom:0;width:0;border-left:2px solid #11e1f3;z-index:2;pointer-events:none}
 .compare-handle::after{content:'';position:absolute;left:-10px;top:50%;width:20px;height:20px;border:2px solid #11e1f3;border-radius:50%;background:#000;transform:translate(-50%,-50%)}
+
+/* === Why section === */
+.section.why {padding-top:3rem;padding-bottom:2rem}
+.section.why h2{margin-bottom:1rem}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1000px;margin:0 auto 1.25rem}
+.why-grid ul{list-style:disc;padding-left:1.2rem}
+.pull-quote{max-width:1000px;margin:0 auto;border-left:4px solid #11e1f3;padding:1rem 1.25rem 1rem 1rem;color:#bcd;opacity:.95}
+
+/* === Gallery hover flip === */
+.grid .card{position:relative;overflow:hidden}
+.grid .card img{display:block;width:100%;height:auto;transition:opacity .25s ease;position:absolute;inset:0;object-fit:cover}
+.grid .card .img-old{opacity:1}
+.grid .card .img-new{opacity:0}
+.grid .card:hover .img-old{opacity:0}
+.grid .card:hover .img-new{opacity:1}
+/* Touch: allow tap to flip by toggling .flip class */
+.grid .card.flip .img-old{opacity:0}
+.grid .card.flip .img-new{opacity:1}

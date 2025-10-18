@@ -113,3 +113,51 @@
   onScroll();
   btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 })();
+
+
+// --- Flipcard tap support and lightbox with visible image ---
+(function(){
+  const supportsHover = window.matchMedia && window.matchMedia('(hover:hover)').matches;
+  const cards = Array.from(document.querySelectorAll('.gallery .card.flipcard'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-cap');
+  let idx = -1;
+
+  function visibleSrc(card){
+    const newImg = card.querySelector('.img-new');
+    const oldImg = card.querySelector('.img-old');
+    // Decide by class or computed opacity
+    if(card.classList.contains('flip') || (!supportsHover && newImg)) return newImg.getAttribute('src');
+    const op = parseFloat(getComputedStyle(newImg).opacity || '0');
+    return op >= 0.5 ? newImg.getAttribute('src') : oldImg.getAttribute('src');
+  }
+
+  function openAt(i){
+    const card = cards[i];
+    if(!card || !lb || !lbImg) return;
+    const src = visibleSrc(card);
+    lbImg.src = src;
+    if(lbCap) lbCap.textContent = src.toLowerCase().includes('_now') ? '2025 version' : '1993 version';
+    lb.classList.add('open');
+    lb.setAttribute('aria-hidden','false');
+    idx = i;
+  }
+
+  cards.forEach((card,i)=>{
+    // On touch devices, toggle .flip on tap to simulate hover
+    if(!supportsHover){
+      card.addEventListener('click', (e)=>{
+        if(!card.classList.contains('flip')){
+          card.classList.add('flip');
+        }else{
+          // second tap opens
+          openAt(i);
+        }
+      });
+    }else{
+      // Desktop: single click opens with the currently visible image
+      card.addEventListener('click', ()=> openAt(i));
+    }
+  });
+})();

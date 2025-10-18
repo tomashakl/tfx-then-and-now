@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TFX: Then & Now — Fan Project</title>
+  <meta name="description" content="A fan project that places original 1993 TFX screenshots next to 2025 modern reimaginations in a clean, single-page gallery." />
+  <meta name="keywords" content="TFX, Digital Image Design, Ocean Software, 1993, flight simulator, retro gaming, DOS, fan project, reimagined, Then and Now, comparison, gallery" />
+  <link rel="canonical" href="https://tomashakl.github.io/tfx-then-and-now/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TFX: Then & Now — Fan Project" />
+  <meta property="og:description" content="A non-commercial fan project reimagining TFX (1993) with modern visuals, shown side-by-side with the originals." />
+  <meta property="og:image" content="https://tomashakl.github.io/tfx-then-and-now/assets/tfx_hero.png" />
+  <meta property="og:url" content="https://tomashakl.github.io/tfx-then-and-now/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TFX: Then & Now — Fan Project" />
+  <meta name="twitter:description" content="Original 1993 TFX scenes vs 2025 reimagined artwork — side by side." />
+  <meta name="twitter:image" content="https://tomashakl.github.io/tfx-then-and-now/assets/tfx_hero.png" />
+  <link rel="icon" type="image/png" href="assets/favicon-512.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "TFX: Then & Now",
+    "about": "A non-commercial fan project reimagining the 1993 flight simulator TFX with modern visuals, shown side by side with the originals.",
+    "creator": {"@type": "Person", "name": "tomasakl"},
+    "url": "https://tomashakl.github.io/tfx-then-and-now/",
+    "inLanguage": "en",
+    "license": "https://creativecommons.org/licenses/by-nc/4.0/"
+  }
+  </script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">▲</span>
+        <span class="brand-name">TFX: Then & Now</span>
+      </div>
+      <nav class="menu" aria-label="Main">
+        <a href="#original">The Original</a>
+        <a href="#reimagined">Reimagined</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" id="home" aria-label="Landing">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+      <h1>TFX: THEN & NOW</h1>
+      <p class="subtitle">A tribute to Digital Image Design’s 1993 classic — reimagined for 2025.</p>
+      <div class="cta">
+        <a class="btn primary" href="#reimagined">Enter Hangar</a>
+        <a class="btn ghost" href="#gallery">View Gallery</a>
+      </div>
+    </div>
+    <div class="hero-bg">
+      <img loading="lazy" src="assets/tfx_hero.png" alt="TFX – Reimagined 2025" class="bg-single" />
+    </div>
+  </section>
+
+  <!-- The Original -->
+  <section class="section original" id="original">
+    <div class="container two-col">
+      <div class="col media">
+        <div class="scan-grid">
+          <img loading="lazy" src="assets/tfx_7.webp" alt="Original TFX 1993 — clouds" />
+          <img loading="lazy" src="assets/tfx_8.gif" alt="Original TFX 1993 — dusk desert" />
+          <img loading="lazy" src="assets/tfx_14.gif" alt="Original TFX 1993 — cockpit refuel view" />
+        </div>
+      </div>
+      <div class="col text">
+        <h2>The Original TFX (1993)</h2>
+        <p>Released in 1993 by Digital Image Design and Ocean Software, <strong>TFX</strong> pushed the limits of PC hardware — real 3D environments, dynamic campaigns, and a cinematic camera — all on a 386 machine.</p>
+        <div class="infobox">
+          <div class="label">Played on</div>
+          <div class="value">386DX-40, 4 MB RAM, 8-bit ISA sound</div>
+        </div>
+        <p class="note">Non-commercial fan tribute. All trademarks belong to their respective owners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reimagined -->
+  <section class="section reimagined" id="reimagined">
+    <div class="container">
+      <h2>Reimagined — 2025</h2>
+      <p class="lead">Static previews with a subtle hover. Click any image to open in a lightbox.</p>
+
+      <figure class="compare">
+        <div class="compare-wrapper" data-compare>
+          <img loading="lazy" src="assets/tfx_7.webp" alt="Then 1993 — clouds" />
+          <div class="compare-resize"><img loading="lazy" src="assets/clouds_now.png" alt="Now 2025 — clouds" /></div>
+          <input type="range" min="0" max="100" value="50" class="compare-range" aria-label="Drag to compare images">
+          <div class="compare-handle" aria-hidden="true"></div>
+        </div>
+        <figcaption>High above the clouds — 1993 vs 2025</figcaption>
+      </figure>
+
+      <figure class="compare">
+        <div class="compare-wrapper" data-compare>
+          <img loading="lazy" src="assets/tfx_8.gif" alt="Then 1993 — desert at dusk" />
+          <div class="compare-resize"><img loading="lazy" src="assets/desert_now.png" alt="Now 2025 — desert at dusk" /></div>
+          <input type="range" min="0" max="100" value="50" class="compare-range" aria-label="Drag to compare images">
+          <div class="compare-handle" aria-hidden="true"></div>
+        </div>
+        <figcaption>Low over the desert — 1993 vs 2025</figcaption>
+      </figure>
+
+      <figure class="compare">
+        <div class="compare-wrapper" data-compare>
+          <img loading="lazy" src="assets/tfx_14.gif" alt="Then 1993 — cockpit refueling view" />
+          <div class="compare-resize"><img loading="lazy" src="assets/refuel_cockpit_now.png" alt="Now 2025 — cockpit refueling view" /></div>
+          <input type="range" min="0" max="100" value="50" class="compare-range" aria-label="Drag to compare images">
+          <div class="compare-handle" aria-hidden="true"></div>
+        </div>
+        <figcaption>Plugging in — 1993 vs 2025</figcaption>
+      </figure>
+    </div>
+  </section>
+
+    <!-- Gallery -->
+  <section class="section gallery" id="gallery">
+    <div class="container">
+      <h2>Gallery — Then & Now</h2>
+      <p class="lead">Static previews with a subtle hover. Click any image to open in a lightbox.</p>
+      <div class="grid">
+        <div class="card"><img loading="lazy" src="assets/tfx_15.gif" alt="Refueling over ocean — 1993" /></div>
+        <div class="card"><img loading="lazy" src="assets/farmland_now.png" alt="Farmland from above — 2025 reimagined" /></div>
+        <div class="card"><img loading="lazy" src="assets/tfx_11.webp" alt="Desert convoy — 1993" /></div>
+        <div class="card"><img loading="lazy" src="assets/tfx_10.gif" alt="HUD cockpit — 1993" /></div>
+        <div class="card"><img loading="lazy" src="assets/mission_complete_now.png" alt="Mission complete silhouette — 2025 reimagined" /></div>
+        <div class="card"><img loading="lazy" src="assets/fog_jet_now.png" alt="Jet in fog bank — 2025 reimagined" /></div>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image viewer">
+      <button class="nav prev" aria-label="Previous image">‹</button>
+      <button class="nav next" aria-label="Next image">›</button>
+      <button class="close" data-close aria-label="Close viewer">×</button>
+      <img id="lightbox-img" alt="Expanded view" />
+      <div class="caption" id="lightbox-cap"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container narrow">
+      <h2>About this Fan Project</h2>
+      <p><strong>TFX: Then & Now</strong> is a purely non-commercial fan tribute to the 1993 classic by Digital Image Design. The goal is to place original DOS-era scenes next to modern 2025 reinterpretations in a respectful, like-for-like way.</p>
+      <p>Image credits: original screenshots captured from the 1993 game, modern visuals are AI-assisted artwork guided and curated by the project author.</p>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="logo">TFX • 2025</div>
+        <div class="legal">© 2025 TFX: Then & Now — Fan Project. All trademarks and copyrights remain with their respective owners.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <button id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+  <script src="main.js"></script>
+</body>
+</html>

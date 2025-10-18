@@ -67,3 +67,37 @@ Objective: achieve a complete, modular, and easily duplicable version that can b
 
 -------------------------------------------
 End of document.
+
+
+============================================================
+INTERNAL DEVELOPMENT NOTES – 2025‑10 UPDATE
+============================================================
+
+• Base version: tfx‑then‑and‑now‑main (2).zip
+• Update purpose: replace all image pairs (Then/Now) with new material (TFX.zip)
+
+Structure & logic
+-----------------
+1. Folder “C” → images for 3rd comparison slider (cockpit view)
+   - gallery_C_then.*, gallery_C_now.*
+   - Replaces the old “refueling” slider completely.
+
+2. Folders “1–6” → six pairs for the gallery (Then/Now flipcards)
+   - gallery_1_then.*, gallery_1_now.*  → first gallery card
+   - … up to gallery_6_then.*, gallery_6_now.*
+   - Each card shows the 1993 image and its 2025 reimagined version.
+
+3. Each folder always contains a pair (old/new). The script automatically detects which is which
+   using filename heuristics (“ChatGPT Image” → new).
+
+4. SEO & optimization steps
+   - All <img> tags have alt text, lazy‑loading, consistent casing.
+   - Added semantic structure, captions, and clear file naming for clarity.
+   - Ready for direct upload to GitHub Pages or other static hosting.
+
+5. Future workflow
+   - To update gallery again: replace image pairs inside folders 1–6 + C.
+   - Run the update script or manually swap “gallery_X_then/now.*” files in /assets.
+   - Check that each <figure> and .card.flipcard remains balanced (two images).
+
+============================================================

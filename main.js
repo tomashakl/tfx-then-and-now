@@ -87,3 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
   btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
 })();
 
+
+// Touch support for compare sliders
+document.querySelectorAll('[data-compare]').forEach(wrapper => {
+  const resize = wrapper.querySelector('.compare-resize');
+  const handle = wrapper.querySelector('.compare-handle');
+  const range  = wrapper.querySelector('.compare-range');
+  const setPos = (val) => {
+    const pct = Math.min(100, Math.max(0, val));
+    resize.style.width = pct + '%';
+    handle.style.left = pct + '%';
+    range.value = pct;
+  };
+  function pointer(e){
+    const rect = wrapper.getBoundingClientRect();
+    const x = (e.touches? e.touches[0].clientX : e.clientX) - rect.left;
+    setPos((x/rect.width)*100);
+  }
+  wrapper.addEventListener('touchstart', (e)=>{ e.preventDefault(); pointer(e); }, {passive:false});
+  wrapper.addEventListener('touchmove', (e)=>{ e.preventDefault(); pointer(e); }, {passive:false});
+});
